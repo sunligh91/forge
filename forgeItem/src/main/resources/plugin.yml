@@ -1,0 +1,22 @@
+name: ForgeItem
+#名称
+main: com.github.sunligh91.forge.main.ForgeItem
+#包名+主类名
+version: 1.0.0
+#版本
+commands:
+  sunc:
+    description: 鉴定系统
+    usage: 错误的指令，请输入sunc查看指令列表
+    permission: sunc.all
+    permission-message: 你没有这个权限！
+  suncr:
+    description: 重新读取配置文件
+    usage: 错误的指令，请输入suncr查看指令列表
+    permission: suncr.all
+    permission-message: 你没有这个权限！
+permissions:
+  sunc.all:
+    default: true
+  suncr.all:
+    default: op
