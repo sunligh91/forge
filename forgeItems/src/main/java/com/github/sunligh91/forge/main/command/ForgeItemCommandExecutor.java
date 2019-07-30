@@ -1,7 +1,7 @@
 package com.github.sunligh91.forge.main.command;
 
 import com.github.sunligh91.forge.main.ForgeItemTextLoader;
-import org.apache.commons.lang.StringUtils;
+import com.github.sunligh91.forge.main.utils.ClearSourceUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -12,12 +12,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.util.StringUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ForgeItemCommandExecutor implements CommandExecutor {
 
@@ -30,25 +26,42 @@ public class ForgeItemCommandExecutor implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player){
-            if (args.length>1 && args[1].equals("open")) {
-                Player p1 = (Player) sender;
-                Inventory inventory = Bukkit.createInventory(p1, 9, ForgeItemTextLoader.PLUGIN_GUI_TITLE);
-                for (int i = 0; i < 9; ++i) {
-                    inventory.setItem(i, getItemStack(Material.THIN_GLASS, "§8无效区域"));
+            Player p1 = (Player) sender;
+            if (args.length>0) {
+                if ("open".equals(args[0])) {
+                    Inventory inventory = Bukkit.createInventory(p1, 9, ForgeItemTextLoader.PLUGIN_GUI_TITLE);
+                    makeGlass(inventory);
+
+                    inventory.setItem(8, getItemStack(Material.SIGN, "§a锻造", "§c请将要锻造的材料放入左侧空白区域"));
+                    p1.closeInventory();
+                    p1.openInventory(inventory);
                 }
-                inventory.setItem(1, null);
-                inventory.setItem(2, null);
-                inventory.setItem(3, null);
-                inventory.setItem(4, null);
-                inventory.setItem(5, null);
-                inventory.setItem(7, getItemStack(Material.SIGN, "§a鉴定", "§c请将要坚定的物品放入左侧空白区域"));
-                p1.closeInventory();
-                p1.openInventory(inventory);
+
+                if ("add".equals(args[0])){
+                    if (args.length>1 && !args[1].equals("")) {
+                        if(sender.isOp()) {
+                            Inventory inventory = Bukkit.createInventory(p1, 9, ForgeItemTextLoader.PLUGIN_GUI_TITLE + "（添加模式）");
+                            makeGlass(inventory);
+                            inventory.setItem(8, getItemStack(Material.SIGN, "§a添加锻造记录：" + args[1], "§c请依次放入锻造材料，锻造产出物品，最后点击我"));
+                            p1.closeInventory();
+                            p1.openInventory(inventory);
+                        } else {
+                            sender.sendMessage("你没有权限使用此命令！");
+                        }
+                    }
+                }
             }
         }
         return true;
     }
 
+    private void makeGlass(Inventory inventory){
+        for (int i = 0; i < 9; ++i) {
+            inventory.setItem(i, getItemStack(Material.THIN_GLASS, "§8无效区域"));
+        }
+        ClearSourceUtil.clear(inventory);
+        inventory.setItem(6, null);
+    }
     private ItemStack getItemStack(Material material, String name, String... lore) {
         ItemStack itemStack = new ItemStack(material);
         ItemMeta itemMeta = itemStack.getItemMeta();

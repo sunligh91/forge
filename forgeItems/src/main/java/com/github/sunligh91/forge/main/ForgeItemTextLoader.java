@@ -11,7 +11,7 @@ public class ForgeItemTextLoader {
     public static String EQUIP_CHECK_FALSE;
 
 
-    public void init(ForgeItem plugin){
+    public void init(ForgeItems plugin){
         PLUGIN_NAME = (String) plugin.getConfig().get("pluginName");
         PLUGIN_GUI_TITLE = (String) plugin.getConfig().get("pluginGuiTitle");
         CHECK_MONEY_TRUE = (String) plugin.getConfig().get("checkMoneyTrue");

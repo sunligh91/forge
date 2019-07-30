@@ -1,0 +1,16 @@
+#插件名称
+pluginName: '[§a初音初音§f]'
+#插件GUI标题
+pluginGuiTitle: '              §4初音初音锻造系统'
+#玩家扣除金钱提示
+checkMoneyTrue: '锻造装备，消耗了%money%元'
+#玩家余额不足提示
+checkMoneyFalse: '你的钱不够啊!'
+#装备锻造成功提示
+equipCheckTrue: '叮咚！恭喜你！锻造成功'
+#装备锻造异常（如装备不可锻造）提示
+equipCheckFalse: '锻造失败啦！'
+#鉴定特殊属性全服通告提示
+specialNotification: '恭喜%player%获得超级神器'
+#物品列表
+items:

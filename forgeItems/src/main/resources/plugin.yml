@@ -1,6 +1,6 @@
 name: ForgeItems
 #名称
-main: com.github.sunligh91.forge.main.ForgeItem
+main: com.github.sunligh91.forge.main.ForgeItems
 #包名+主类名
 version: 1.0.0
 #版本

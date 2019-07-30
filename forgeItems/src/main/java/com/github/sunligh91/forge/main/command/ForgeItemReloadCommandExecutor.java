@@ -1,15 +1,15 @@
 package com.github.sunligh91.forge.main.command;
 
-import com.github.sunligh91.forge.main.ForgeItem;
+import com.github.sunligh91.forge.main.ForgeItems;
 import com.github.sunligh91.forge.main.ForgeItemTextLoader;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
 public class ForgeItemReloadCommandExecutor implements CommandExecutor {
-    private ForgeItem plugin;
+    private ForgeItems plugin;
 
-    public ForgeItemReloadCommandExecutor(ForgeItem plugin) {
+    public ForgeItemReloadCommandExecutor(ForgeItems plugin) {
         this.plugin=plugin;
     }
 
