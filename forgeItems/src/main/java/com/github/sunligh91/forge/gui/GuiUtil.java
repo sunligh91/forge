@@ -139,9 +139,7 @@ public class GuiUtil {
         }else if(rawSlot == 5 || rawSlot == 7 ){
             event.setCancelled(true);
         } else if(rawSlot<5){
-            if(inventory.getItem(rawSlot)!=null && inventory.getItem(rawSlot).getType() == event.getCurrentItem().getType()){
-                event.setCancelled(true);
-            }
+
         }
     }
 
@@ -217,9 +215,15 @@ public class GuiUtil {
                         memoryConfiguration.set("key",map);
                         memoryConfiguration.set("value",overMap);
                         items.set(name,memoryConfiguration);
-                        plugin.saveConfig();
+                        try {
+                            plugin.saveConfig();
+                            plugin.reloadConfig();
+                        } catch (Exception e){
+                            player.sendMessage(ForgeItemTextLoader.PLUGIN_NAME +" §e保存插件配置失败，请检查配置文件");
+                            event.setCancelled(true);
+                            return;
+                        }
                         player.sendMessage(ForgeItemTextLoader.PLUGIN_NAME +" §e创建合成公式成功");
-                        player.playSound(player.getLocation(), Sound.ENTITY_FIREWORK_SHOOT,5,0);
                         event.setCancelled(true);
                     } else {
                         player.sendMessage(ForgeItemTextLoader.PLUGIN_NAME +" §e合成公式已存在");

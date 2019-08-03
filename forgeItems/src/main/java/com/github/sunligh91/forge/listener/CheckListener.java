@@ -53,8 +53,7 @@ public class CheckListener implements Listener {
                     ItemStack[] items = {inventory.getItem(0),inventory.getItem(1),inventory.getItem(2),inventory.getItem(3),inventory.getItem(4),inventory.getItem(6)};
                     ClearSourceUtil.clear(inventory);
                     inventory.setItem(6, null);
-                    List<ItemStack> itemStacks = Arrays.asList(items);
-                    for (ItemStack itemStack : itemStacks) {
+                    for (ItemStack itemStack : items) {
                         if (itemStack!=null) {
                             event.getPlayer().getWorld().dropItem(event.getPlayer().getLocation(), itemStack);
                         }
